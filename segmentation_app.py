@@ -45,11 +45,8 @@ st.set_page_config(
     initial_sidebar_state="expanded"  # Expanding sidebar by default
 )
 
-brain_yolo_model_path = '/home/bilal/Desktop/tumor_detection_with_medical_images/runs/segment/yolov8m-seg/weights/best.pt'
-breast_yolo_model_path = '/home/bilal/Desktop/tumor_detection_with_medical_images/runs/segment/yolov8l-seg/weights/best.pt'
+brain_yolo_model_path = '/home/bilal-ai/Desktop/tumor_detection_with_medical_images/runs/segment/yolov8m-seg/weights/best.pt'
 model_for_brain = YOLO(brain_yolo_model_path)
-model_for_breast = YOLO(breast_yolo_model_path)
-
 
 # Filling difference colors for difference brain tumor types but we have a our brain tumor class
 # yolo_classes = list(model.names.values())
@@ -59,8 +56,8 @@ model_for_breast = YOLO(breast_yolo_model_path)
 # Creating sidebar
 with (st.sidebar):
     st.header("Image Config")  # Adding header to sidebar
-    selections = ['Brain Tumor Segmentation', 'Breast Tumor Segmentation', 'Lung Tumor Segmentation']
-    selection = st.selectbox('Lütfen bir seçeneğe tıklayın: ', selections)
+    selections = ['Brain MRI']
+    selection = st.selectbox('Please click a selection: ', selections)
     # Adding file uploader to sidebar for selecting images
     source_img = st.sidebar.file_uploader(
         "Choose an image...", type=("jpg", "jpeg", "png", 'bmp', 'webp'))
@@ -97,8 +94,6 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 
-if selection == 'Brain Tumor Segmentation':
+if selection == 'Brain MRI':
     Detect_Objects_Button(model_for_brain)
-else:
-    Detect_Objects_Button(model_for_breast)
 
